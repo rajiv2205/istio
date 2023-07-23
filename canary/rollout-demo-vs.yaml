@@ -3,16 +3,20 @@ kind: VirtualService
 metadata:
   name: rollout-demo-vs
 spec:
-  hosts:
-  - "rollout-demo.example.com"
   gateways:
   - rollout-demo-gateway
+  hosts:
+  - rollout-demo.example.com
   http:
   - name: canary
     route:
     - destination:
+        host: rollouts-demo
+        port:
+          number: 80
       weight: 100
-        host: rollout-demo
     - destination:
+        host: rollouts-demo-preview
+        port:
+          number: 80
       weight: 0
-        host: rollout-demo-preview
